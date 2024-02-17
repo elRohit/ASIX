@@ -8,7 +8,7 @@
                 <table width="90%" height="40px" border="1px" cellpadding="2px" cellspacing="0px" bgcolor="#b9cbf9">
                     <tbody>
                     <xsl:for-each select="/Taller_XML/minerals">
-                        <xsl:if test="nom = 'ÒPAL'">
+                        <xsl:if test="nom = 'URANINITA'">
                             <tr>
                                 <td width="25%" height="35"><b>MINERAL</b></td>
                                 <td width="25%"><xsl:value-of select="nom"/></td>
@@ -23,7 +23,7 @@
                 <table width="90%" border="1px" cellpadding="4px" cellspacing="0px">
                     <tbody>
                     <xsl:for-each select="/Taller_XML/minerals">
-                    <xsl:if test="nom = 'ÒPAL'">
+                    <xsl:if test="nom = 'URANINITA'">
                         <tr>
                             <td bgcolor="#b9cbf9" width="50%"><b>Densitat: </b><xsl:value-of select="densitat"/></td>
                             <td rowspan="3" bgcolor="#d0ddfb">
