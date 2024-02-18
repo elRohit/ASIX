@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="minerals_fitxa.xsl"?>
+<?xml-stylesheet type="text/xsl" href="xsl/minerals_llista_24.xsl"?> <!-- Especificar el XSL que vols assignar, tots estan a xsl\* -->
 <!--
 -
 - phpMyAdmin XML Dump
