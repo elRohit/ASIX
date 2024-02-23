@@ -1,84 +1,70 @@
-from tkinter import *
-from tkinter import messagebox
-from PIL import ImageTk, Image
+import tkinter as tk
+import tkinter.messagebox
+import functools # Permet passar paràmetres a la funció que es crida des del botó
 
-def Sumar():
-    try:
-        res = float(EntryNum1.get()) + float(EntryNum2.get())
-        entResultat.insert(0,str(res))
-    except ValueError:
-        messagebox.showwarning("Error","N1 i N2 han de números")
-    except ZeroDivisionError:
-        messagebox.showwarning("Error","No es pot dividir per 0")
+def afegirDigit(d):
+    existent = entry.get()
+    entry.delete(0, tk.END)
+    entry.insert(tk.END, existent + str(d))
 
-def Restar():
-    try:
-        res = float(EntryNum1.get()) - float(EntryNum2.get())
-        entResultat.insert(0,str(res))
-    except ValueError:
-        messagebox.showwarning("Error","N1 i N2 han de números")
-    except ZeroDivisionError:
-        messagebox.showwarning("Error","No es pot dividir per 0")
+def popDisplay():
+    existent = entry.get()
+    entry.delete(0, tk.END)
+    entry.insert(tk.END, existent[:-1])
 
-def Multiplicar():
-    try:
-        res = float(EntryNum1.get()) * float(EntryNum2.get())
-        entResultat.insert(0,str(res))
-    except ValueError:
-        messagebox.showwarning("Error","N1 i N2 han de números")
-    except ZeroDivisionError:
-        messagebox.showwarning("Error","No es pot dividir per 0")
+def clearDisplay():
+    entry.delete(0, tk.END)
 
-def Dividir():
-    try:
-        res = float(EntryNum1.get()) / float(EntryNum2.get())
-        entResultat.insert(0,str(res))
-    except ValueError:
-        messagebox.showwarning("Error","N1 i N2 han de números")
-    except ZeroDivisionError:
-        messagebox.showwarning("Error","No es pot dividir per 0")
-
-def Sortir():
-    finestra.destroy()
+def calcular():
+    expression = entry.get()
+    result = eval(expression)
+    entry.delete(0, tk.END)
+    entry.insert(tk.END, result)
 
 def main():
-    global finestra
-    finestra = Tk()
-    labelNum1 = Label(finestra,text='Numero 1')
-    labelNum1.grid(row=0,column=0)
-    global EntryNum1
-    EntryNum1 = Entry(finestra)
-    EntryNum1.grid(row=0,column=1,columnspan=4)
 
-    labelNum2 = Label(finestra,text='Numero 2')
-    labelNum2.grid(row=1,column=0)
-    global EntryNum2
-    EntryNum2 = Entry(finestra)
-    EntryNum2.grid(row=1,column=1,columnspan=4)
 
-    labelResultat = Label(finestra,text='Resultat')
-    labelResultat.grid(row=2,column=0)
-    global entResultat
-    entResultat = Entry(finestra)
-    entResultat.grid(row=2,column=1,columnspan=4)
-    global exit_img
-    exit_img = ImageTk.PhotoImage(Image.open("C:/Users/rkuma/Documents/GitHub/ASIX1/Prog/Python/UF2_Programcio_Modular/Python visual/exit.png").resize((50,50)))
-    BtnQuit = Button(finestra, image=exit_img, command=Sortir)
-    BtnQuit.grid(row=3, column=0)
+    finestra = tk.Tk()
+    finestra.title("Calculadora Básica")
 
-    BtnSuma = Button(finestra,text="Sumar",command=Sumar)
-    BtnSuma.grid(row=3,column=1)
+    #1.  Aquest és el display de la calculadora per veure els números que s'han introduït i el resultat (no editable)
+    global entry
+    entry = tk.Entry(finestra, width=35, borderwidth=5)
+    entry.grid(row=0, column=0, columnspan=3, padx=10, pady=10)  # Updated columnspan to 4
 
-    BtnResta = Button(finestra,text="Restar",command=Restar)
-    BtnResta.grid(row=3,column=2)
+    equal_button = tk.Button(finestra, text="=", padx=40, pady=20, command=calcular)
+    equal_button.grid(row=0, column=3)
 
-    BtnMult = Button(finestra,text="Multiplicar",command=Multiplicar)
-    BtnMult.grid(row=3,column=3)
+    operacions = ["+", "-", "*", "/"]
 
-    BtnDiv = Button(finestra,text="Dividir",command=Dividir)
-    BtnDiv.grid(row=3,column=4)
+    #2.  Aquesta és la llista de botons que es mostren a la calculadora junts amb les seves coordenades de row i column del aparmetre GRID, 
+    buttons = [
+        ("1", 1, 0),
+        ("2", 1, 1),
+        ("3", 1, 2),
+        ("4", 2, 0),
+        ("5", 2, 1),
+        ("6", 2, 2),
+        ("7", 3, 0),
+        ("8", 3, 1),
+        ("9", 3, 2),
+        ("0", 4, 0),
+        (operacions[0], 1, 3),
+        (operacions[1], 2, 3),
+        (operacions[2], 3, 3),
+        (operacions[3], 4, 3)
+        ]
 
-    finestra.geometry("+{0}+{1}".format(400,400))
+    for txt_boto, row, column in buttons:
+        button = tk.Button(finestra, text=txt_boto, padx=40, pady=20, command=lambda text=txt_boto: afegirDigit(text))
+        button.grid(row=row, column=column)
+
+    return_lletra = tk.Button(finestra, text="<-", padx=40, pady=20, command=popDisplay)
+    return_lletra.grid(row=4, column=2)  
+
+    boto_clear = tk.Button(finestra, text="C", padx=40, pady=20, command=clearDisplay)
+    boto_clear.grid(row=4, column=1)  
+
 
     finestra.mainloop()
 
