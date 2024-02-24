@@ -14,8 +14,8 @@
       <th style="text-align:center;">Grup</th>
     </tr>
     <xsl:for-each select="/Taller_XML/minerals">
-      <xsl:sort select="Id" order="ascending"/>
       <xsl:sort select="grup" order="descending"/>
+      <xsl:sort select="Id" order="ascending"/>
       
         <tr bgcolor = "#d4e3e8">
           <td><xsl:value-of select="Id"/></td>
