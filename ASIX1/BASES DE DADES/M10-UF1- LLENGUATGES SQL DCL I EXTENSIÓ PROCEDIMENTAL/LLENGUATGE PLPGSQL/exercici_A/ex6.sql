@@ -10,7 +10,7 @@ CREATE TABLE public.auditoria_departments (
 );
 */
 
-
+/*
 --Creació del trigger
 CREATE OR REPLACE TRIGGER auditoria_departments
 AFTER INSERT OR UPDATE OR DELETE ON departments
@@ -23,7 +23,7 @@ BEGIN
         WHEN DELETING THEN 'D'
     END);
 END;
-
+*/
 --Creem la funció
 CREATE OR REPLACE FUNCTION process_dept_audit()
 RETURNS TRIGGER AS $dept_audit$
