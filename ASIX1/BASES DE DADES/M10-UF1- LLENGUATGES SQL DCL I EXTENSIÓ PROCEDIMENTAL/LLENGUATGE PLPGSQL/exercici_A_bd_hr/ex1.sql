@@ -22,4 +22,5 @@ CALL get_employee_name(110,emp_fn);
 END; $execucio_emp_name$
 
 --Comprovació
---SELECT first_name from employees where employee_id = 110;
+--SELECT first_name from employees where employee_id = 110; Res: TIFFANY
+
