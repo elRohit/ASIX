@@ -11,8 +11,9 @@
 CREATE OR REPLACE FUNCTION f_CalcularCost(
     p_preu_lloguer IN film.rental_rate%TYPE,
     p_cost_subs IN film.replacement_cost%TYPE
-) AS $func$
-language plpgsql
+)RETURNS NUMERIC
+language plpgsql 
+AS $func$
 DECLARE
     cost_total NUMERIC(5,2);
 BEGIN
@@ -29,4 +30,4 @@ BEGIN
 END; $func$
 
 -- DB Query
-SELECT film_id, title, rental_rate, f_CalcularCost(rental_rate, replacement_cost) as cost_subs_previst;
+SELECT film_id, title, rental_rate, f_CalcularCost(rental_rate, replacement_cost) as cost_subs_previst FROM film;

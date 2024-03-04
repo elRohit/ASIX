@@ -7,7 +7,7 @@ DECLARE
     v_actor_role varchar;
 BEGIN
     -- Get the number of movies the actor has participated in
-    SELECT COUNT(*) INTO v_num_movies FROM film_actor WHERE actor_id = p_actor_id;
+    SELECT COUNT(*) INTO STRICT v_num_movies FROM film_actor WHERE actor_id = p_actor_id;
 
     -- Print the number of movies
     RAISE NOTICE 'Pel·lícules on ha participat: %', v_num_movies;
@@ -26,11 +26,15 @@ BEGIN
 
     -- Print the actor's role
     RAISE NOTICE '%', v_actor_role;
+	
+EXCEPTION
+	WHEN no_data_found
+	THEN RAISE NOTICE ' No es pot trobat el actor o categoria que es diu, torna a intentar';
 END; $$
 
 -- Another Block or Script
 
 DO $$
 BEGIN
-	CALL show_actor_info(120);
+	CALL show_actor_info(201);
 END;$$
