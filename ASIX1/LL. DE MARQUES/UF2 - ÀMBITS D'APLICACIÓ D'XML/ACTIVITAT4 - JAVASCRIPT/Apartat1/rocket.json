@@ -1,0 +1,18 @@
+{
+    "propietaris": [
+        { "name": "Cristina", "edat": 20 },
+        { "name": "Carlos", "edat": 30 }
+    ],
+    "espècies": [
+        { "nom": "Gos", "raça": "Pastor Alemany" },
+        { "nom": "Gat", "raça": "Siames" }
+    ],
+    "animals": [
+        { "nom": "Toby", "raça": "Gos", "propietari": "Cristina" },
+        { "nom": "Rex", "raça": "Gos", "propietari": "Carlos" },
+        { "nom": "Miau", "raça": "Gat", "propietari": "Cristina" },
+        { "nom": "Garfield", "raça": "Gat", "propietari": "Carlos" },
+        { "nom": "Firulais", "raça": "Gos", "propietari": "Cristina" },
+        { "nom": "Tom", "raça": "Gat", "propietari": "Carlos" }
+    ]
+}
