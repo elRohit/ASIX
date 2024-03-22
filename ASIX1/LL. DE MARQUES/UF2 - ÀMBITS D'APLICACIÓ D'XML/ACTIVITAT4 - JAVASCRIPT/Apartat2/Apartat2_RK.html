@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Use HTTP GET to Get JSON Data from a API Server</h2>
+
+<table id="demo" border="1"></table>
+
+<script>
+const xmlhttp = new XMLHttpRequest();
+let myObj;
+let dbParam = JSON.stringify();
+xmlhttp.onload = function() {
+  myObj = JSON.parse(this.responseText);
+  let text = "";
+  
+  text += '<tr><th colspan="100"><b>Actual</b></th></tr>';
+  text += '<tr><td colspan="50"><b>Latitud</b></td><td colspan="50">' + myObj.latitude + '</td></tr>';
+  text += '<tr><td colspan="50"><b>Longitud</b></td><td colspan="50">' + myObj.longitude + '</td></tr>';
+  text += '<tr><td colspan="50"><b>Hora</b></td><td colspan="50">' + myObj.current.time + '</td></tr>';
+  text += '<tr><td colspan="50"><b>Temperatura</b></td><td colspan="50">' + myObj.current.temperature_2m + '</td></tr>';
+  text += '<tr><td colspan="50"><b>Velocitat del vent</b></td><td colspan="50">' + myObj.current.wind_speed_10m + '</td></tr>';
+  text += '<tr><th colspan="100"><b>Previsió</b></th></tr>';
+  text += '<tr><th colspan="25"><b>Hora</b></th><th colspan="25"><b>Velocitat del vent</b></th><th colspan="25"><b>Temperatura</b></th><th colspan="25"><b>Humitat relativa</b></th></tr>';
+  
+  for (let i in myObj.hourly.time) {
+    text += '<tr>';
+    text += '<td colspan="25">' + myObj.hourly.time[i] + '</td>';
+    text += '<td colspan="25">' + myObj.hourly.wind_speed_10m[i] + '</td>';
+    text += '<td colspan="25">' + myObj.hourly.temperature_2m[i] + '</td>';
+    text += '<td colspan="25">' + myObj.hourly.relative_humidity_2m[i] + '</td>';
+    text += '</tr>';
+  }
+  
+  
+  document.getElementById("demo").innerHTML = text;
+}
+xmlhttp.open("GET", "https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&current=temperature_2m,wind_speed_10m&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m");
+xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+xmlhttp.send("x=" + dbParam);
+</script>
+
+</body>
+</html>
